@@ -72,6 +72,8 @@ class Legend(models.Model):
     @property
     def colormap(self):
         legend = json.loads(self.json)
+        if "continuous" in legend:
+            return legend
         cmap = {}
         for leg in legend:
             cmap[leg['expression']] = hex_to_rgba(leg['color'])
